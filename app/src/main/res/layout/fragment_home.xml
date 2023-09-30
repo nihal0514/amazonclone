@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.HomeFragment">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#84D8E2">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="60dp"
+                android:layout_margin="20dp"
+                android:layout_weight="1.62"
+                android:background="@drawable/bg_corner"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/search_icon_iv"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="0dp"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_searchround"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/search_tv"
+                    android:layout_width="245dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="2dp"
+                    android:singleLine="true"
+                    android:text="Search Amazon.in"
+                    android:textColor="@color/black"
+                    android:textDirection="locale" />
+
+                <ImageView
+                    android:id="@+id/scanner_icon_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/scanner_icon"
+                    tools:ignore="ContentDescription" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/location_tv"
+            android:layout_below="@id/appbar_layout"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="30dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C3EEE7"
+                android:orientation="horizontal">
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                   android:src="@drawable/location_icon" />
+                <TextView
+                    android:padding="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Select a location to see Product availability"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@id/location_tv"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_height="150dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topdeals_recyv"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
