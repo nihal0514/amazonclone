@@ -1,4 +1,4 @@
-package com.example.amazonclone.model
+package com.example.amazonclone.model.category
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

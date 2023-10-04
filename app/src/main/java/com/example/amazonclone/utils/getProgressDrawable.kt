@@ -26,6 +26,14 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
         .into(this)
 }
 
+fun ImageView.loadImage1(uri: String?) {
+    val options = RequestOptions()
+        .error(R.mipmap.ic_launcher_round)
+    Glide.with(this.context)
+        .setDefaultRequestOptions(options)
+        .load(uri)
+        .into(this)
+}
 fun loge(message: Any) {
     Log.e("Demo App Log", "" + message.toString())
 

@@ -3,20 +3,15 @@ package com.example.amazonclone.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.example.amazonclone.R
 import com.example.amazonclone.databinding.ItemTopdealsBinding
-import com.example.amazonclone.model.CategoryListItem
+import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.utils.getProgressDrawable
 import com.example.amazonclone.utils.loadImage
 
 
 @SuppressLint("NotifyDataSetChanged")
-class CategoryListAdapters(private val categoryList: ArrayList<CategoryListItem>,private val onClickListener: OnClickListener)
+class CategoryListAdapters(private val categoryList: ArrayList<CategoryListItem>, private val onClickListener: OnClickListener)
     :RecyclerView.Adapter<CategoryListAdapters.ViewHolder>(){
 
     fun updateCategory(newCategory: List<CategoryListItem>) {

@@ -3,12 +3,12 @@
         android:id="@+id/menu_home"
         android:title="Home"
         android:enabled="true"
-        android:icon="@drawable/baseline_home_24" />
+        android:icon="@drawable/home_icon" />
     <item
         android:id="@+id/menu_profile"
         android:title="You"
         android:enabled="true"
-        android:icon="@drawable/baseline_account_circle_24" />
+        android:icon="@drawable/profile_icon" />
     <item
         android:id="@+id/menu_more"
         android:enabled="true"
@@ -18,10 +18,10 @@
         android:id="@+id/menu_shoppingCart"
         android:enabled="true"
         android:title="Cart"
-        android:icon="@drawable/baseline_shopping_cart_24" />
+        android:icon="@drawable/cart_icon" />
     <item
         android:id="@+id/menu_Menu"
         android:title="Menu"
         android:enabled="true"
-        android:icon="@drawable/baseline_menu_24" />
+        android:icon="@drawable/menu_icon" />
 </menu>
