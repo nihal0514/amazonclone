@@ -17,3 +17,9 @@
 
 ![amazon2](https://github.com/nihal0514/amazonclone/assets/77735813/c97bf1e0-8515-49a2-8e23-7e220bdb395e)
 
+![amazon6](https://github.com/nihal0514/amazonclone/assets/77735813/72d59c0b-bf42-4bdf-a421-c6cf3c227dcb)
+
+
+![amazon5](https://github.com/nihal0514/amazonclone/assets/77735813/f5010f53-f9b4-474c-a8a2-bba7648f2423)
+
+
