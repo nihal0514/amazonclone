@@ -5,10 +5,14 @@ import com.example.amazonclone.model.category.CategoryListResponse
 import com.example.amazonclone.model.login.LoginRequest
 import com.example.amazonclone.model.login.RegisterRequest
 import com.example.amazonclone.model.login.RegisterResponse
+import com.example.amazonclone.model.products.ProdByIdResponse
+import com.example.amazonclone.model.products.ProdListResponse
+import com.example.amazonclone.model.products.Product
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiInterface {
 
@@ -23,5 +27,11 @@ interface ApiInterface {
 
     @POST("auth/login")
     suspend fun loginUser(@Body loginRequest: LoginRequest): Response<RegisterResponse>
+
+    @GET("products/getproducts")
+    suspend fun getProducts(): Response<ProdListResponse>
+
+    @GET("products/getproduct/{id}")
+    suspend fun getProductsById(@Path("id") id: String): Response<ProdByIdResponse>
 
 }

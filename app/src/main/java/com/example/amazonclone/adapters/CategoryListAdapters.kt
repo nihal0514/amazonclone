@@ -38,6 +38,7 @@ class CategoryListAdapters(private val categoryList: ArrayList<CategoryListItem>
 
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemTopdealsBinding.inflate(inflater, parent, false)
+
         return ViewHolder(binding)
     }
 
@@ -47,7 +48,7 @@ class CategoryListAdapters(private val categoryList: ArrayList<CategoryListItem>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categoryList[position])
-        //holder.itemView.setOnClickListener { onClickListener.onClick(c) }
+        holder.itemView.setOnClickListener { onClickListener.onClick(categoryList[position]) }
     }
 
 }

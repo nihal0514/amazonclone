@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground"
+    tools:context=".ui.product.ProductDetails">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/proddescp_img"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/image_prodDetails"
+                    android:layout_width="300dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/amazonimg1"
+                    android:layout_height="200dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/heartimg"
+                        android:layout_height="40dp"/>
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/sendimg"
+                        android:layout_height="40dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@+id/proddescp_img"
+                android:id="@+id/proddetails"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="200dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/starimg"/>
+                <TextView
+                    android:id="@+id/name_prodDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:textSize="20dp"
+                    android:textColor="#407E84"
+                    android:text="Visit the Timex Store"/>
+
+                <TextView
+                    android:id="@+id/descp_prodDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:textSize="15dp"
+                    android:text="Timex Weekender Analog  Beige Dial "/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="35dp"
+                        android:textColor="#CA0000"
+                        android:text="-55%"/>
+                    <TextView
+                        android:id="@+id/price_prodDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="35dp"
+                        android:text="₹ 7,477 "/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:textSize="25dp"
+                        android:text="MRP :"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:textSize="25dp"
+                        android:text="₹16700 "/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@id/proddetails"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/addcartimg"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</FrameLayout>

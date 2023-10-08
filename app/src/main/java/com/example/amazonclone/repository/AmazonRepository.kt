@@ -9,6 +9,8 @@ import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.model.login.LoginRequest
 import com.example.amazonclone.model.login.RegisterRequest
 import com.example.amazonclone.model.login.RegisterResponse
+import com.example.amazonclone.model.products.ProdListItem
+import com.example.amazonclone.model.products.Product
 import com.example.amazonclone.retrofit.ApiInterface
 import javax.inject.Inject
 
@@ -69,6 +71,30 @@ class AmazonRepository @Inject constructor(
         if(result.isSuccessful){
             result.body().let {
                 _loginResponse.postValue(it)
+            }
+        }
+    }
+
+    private val _prodListData= MutableLiveData<List<ProdListItem>>()
+    val prodListData: LiveData<List<ProdListItem>> = _prodListData
+
+    suspend fun getproducts(){
+        val result= apiInterface.getProducts()
+        if(result.isSuccessful){
+            result.body().let {
+                _prodListData.postValue(it?.prodList ?: emptyList())
+            }
+        }
+    }
+
+    private val _prodListByIdData= MutableLiveData<Product>()
+    val prodListByIdData: LiveData<Product> = _prodListByIdData
+
+    suspend fun getproductsByID(id: String){
+        val result= apiInterface.getProductsById(id)
+        if(result.isSuccessful){
+            result.body().let {
+                _prodListByIdData.postValue(it?.product !!)
             }
         }
     }

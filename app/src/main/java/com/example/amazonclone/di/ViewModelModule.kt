@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.amazonclone.viewModel.BannerViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
 import com.example.amazonclone.viewModel.LoginViewModel
+import com.example.amazonclone.viewModel.ProductViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.ClassKey
@@ -25,4 +26,9 @@ abstract class ViewModelModule {
     @ClassKey(LoginViewModel::class)
     @IntoMap
     abstract fun loginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @ClassKey(ProductViewModel::class)
+    @IntoMap
+    abstract fun prodViewModel(productViewModel: ProductViewModel): ViewModel
 }
