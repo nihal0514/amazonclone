@@ -1,60 +1,94 @@
 package com.example.amazonclone.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.amazonclone.R
+import com.example.amazonclone.adapters.CartListAdapter
+import com.example.amazonclone.adapters.ItemClickListener
+import com.example.amazonclone.adapters.OnCartClickListener
+import com.example.amazonclone.adapters.OnClickListener
+import com.example.amazonclone.databinding.FragmentCartBinding
+import com.example.amazonclone.databinding.FragmentHomeBinding
+import com.example.amazonclone.di.ApplicationComponent
+import com.example.amazonclone.di.DaggerApplicationComponent
+import com.example.amazonclone.model.cart.CartRequest
+import com.example.amazonclone.viewModel.BannerViewModel
+import com.example.amazonclone.viewModel.CartViewModel
+import com.example.amazonclone.viewModel.CategoryViewModel
+import com.example.amazonclone.viewModel.MainViewModelFactory
+import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CartFragment : Fragment(),ItemClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [CartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class CartFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var cartListAdaper: CartListAdapter
+    private lateinit var cartRecyv: RecyclerView
+    lateinit var sharedPreferences: SharedPreferences
+    private lateinit var cartViewModel: CartViewModel
+    private lateinit var applicationComponent: ApplicationComponent
+    @Inject
+    lateinit var mainViewModelFactory: MainViewModelFactory
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    lateinit var binding: FragmentCartBinding
+    private lateinit var token: String;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_cart,container,false)
+
+        applicationComponent = DaggerApplicationComponent.factory().create(requireContext())
+        applicationComponent.inject4(this)
+        cartViewModel = ViewModelProvider(this, mainViewModelFactory)[CartViewModel::class.java]
+
+
+        sharedPreferences = requireContext().getSharedPreferences("amazonclone", Context.MODE_PRIVATE)
+       token = sharedPreferences.getString("token",null).toString()
+
+        cartListAdaper= CartListAdapter(arrayListOf(), OnCartClickListener{},this)
+
+
+        binding.cartRecyv.apply {
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+            adapter = cartListAdaper
+        }
+
+        cartViewModel.refresh(token!!)
+
+        ObserveCartModel()
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment CartFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            CartFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun ObserveCartModel(){
+        cartViewModel.cartLiveData.observe(viewLifecycleOwner){
+            binding.totalbillCart.text= it.bill.toString()
+            cartListAdaper.updateCart(it.items ?: emptyList())
+        }
+    }
+
+    override fun onPlusItemClick(itemId:String) {
+        var a= CartRequest()
+        a.itemId= itemId
+        a.quantity= 1
+        cartViewModel.addtoCart(a,token!!)
+        cartViewModel.refresh(token!!)
+    }
+
+
+    override fun onMinusItemClick(itemId: String) {
+        var a= CartRequest()
+        a.itemId= itemId
+        a.quantity= -1
+        cartViewModel.addtoCart(a,token!!)
+        cartViewModel.refresh(token!!)
     }
 }

@@ -2,6 +2,7 @@ package com.example.amazonclone.di
 
 import androidx.lifecycle.ViewModel
 import com.example.amazonclone.viewModel.BannerViewModel
+import com.example.amazonclone.viewModel.CartViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
 import com.example.amazonclone.viewModel.LoginViewModel
 import com.example.amazonclone.viewModel.ProductViewModel
@@ -31,4 +32,9 @@ abstract class ViewModelModule {
     @ClassKey(ProductViewModel::class)
     @IntoMap
     abstract fun prodViewModel(productViewModel: ProductViewModel): ViewModel
+
+    @Binds
+    @ClassKey(CartViewModel::class)
+    @IntoMap
+    abstract fun cartViewModel(cartViewModel: CartViewModel): ViewModel
 }

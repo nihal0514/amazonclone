@@ -5,6 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amazonclone.db.CategoryDB
 import com.example.amazonclone.model.banner.BannerListItem
+import com.example.amazonclone.model.cart.CartRequest
+import com.example.amazonclone.model.cart.CartResponse
+import com.example.amazonclone.model.cart.GetCartResponse
 import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.model.login.LoginRequest
 import com.example.amazonclone.model.login.RegisterRequest
@@ -95,6 +98,31 @@ class AmazonRepository @Inject constructor(
         if(result.isSuccessful){
             result.body().let {
                 _prodListByIdData.postValue(it?.product !!)
+            }
+        }
+    }
+
+    private val _addtoCartData= MutableLiveData<CartResponse>()
+    val addtoCartData: LiveData<CartResponse> = _addtoCartData
+
+    suspend fun addToCart(cartRequest: CartRequest,token:String){
+        val result= apiInterface.addtoCart(cartRequest,token)
+
+        if(result.isSuccessful){
+            result.body().let {
+                _addtoCartData.postValue(it)
+            }
+        }
+    }
+
+    private val _getCartData= MutableLiveData<GetCartResponse>()
+    val getCartData: LiveData<GetCartResponse> = _getCartData
+
+    suspend fun getCartData(token: String){
+        val result= apiInterface.getCart(token);
+        if(result.isSuccessful){
+            result.body().let {
+                _getCartData.postValue(it)
             }
         }
     }

@@ -15,8 +15,11 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.example.amazonclone.R
+import com.example.amazonclone.databinding.FragmentHomeBinding
+import com.example.amazonclone.databinding.FragmentProfileBinding
 import com.example.amazonclone.ui.HomeActivity
 import com.example.amazonclone.ui.signin.LoginActivity
 import kotlinx.android.synthetic.main.fragment_profile.btn_signin
@@ -26,31 +29,28 @@ class ProfileFragment : Fragment() {
     private lateinit var after_signin: RelativeLayout
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var profile_name: TextView
+
+    lateinit var binding: FragmentProfileBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_profile, container, false)
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false)
         sharedPreferences = requireContext().getSharedPreferences("amazonclone", Context.MODE_PRIVATE)
-
-        before_signin= view.findViewById<View>(R.id.beforesignin_profile)as RelativeLayout
-        after_signin= view.findViewById<View>(R.id.aftersignin_profile)as RelativeLayout
-        btn_signin= view.findViewById<View>(R.id.btn_signin)as AppCompatButton
-        profile_name= view.findViewById<View>(R.id.profile_name)as TextView
 
         val token = sharedPreferences.getString("token",null)
         val name = sharedPreferences.getString("name",null)
         if(token!= null){
-            before_signin.visibility= View.GONE
-            after_signin.visibility= View.VISIBLE
-            profile_name.text= name
+            binding.beforesigninProfile.visibility= View.GONE
+            binding.aftersigninProfile.visibility= View.VISIBLE
+            binding.profileName.text= name
         }
 
-        btn_signin.setOnClickListener{
+        binding.btnSignin.setOnClickListener{
             val intent = Intent (getActivity(), LoginActivity::class.java)
             getActivity()?.startActivity(intent)
         }
-        return view
+        return binding.root
     }
 }

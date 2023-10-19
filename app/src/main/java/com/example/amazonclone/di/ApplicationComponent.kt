@@ -2,11 +2,14 @@ package com.example.amazonclone.di
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.amazonclone.fragments.CartFragment
 import com.example.amazonclone.fragments.HomeFragment
 import com.example.amazonclone.ui.product.Prodpage
 import com.example.amazonclone.ui.product.ProductDetails
 import com.example.amazonclone.ui.signin.LoginFragment
 import com.example.amazonclone.ui.signin.SignUpFragment
+import com.example.amazonclone.utils.Injectable
+import com.example.amazonclone.viewModel.CartViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -23,6 +26,8 @@ interface ApplicationComponent {
     fun inject2(prodpage: Prodpage)
 
     fun inject3(productDetails: ProductDetails)
+
+    fun inject4(cartFragment: CartFragment)
 
 
     fun getMap(): Map<Class<*>, ViewModel>

@@ -24,9 +24,6 @@ class ProdPageAdapter(private val prodListItem: ArrayList<ProdListItem>, private
         private val progressDrawable = getProgressDrawable(binding.root.context)
         fun bind(products: ProdListItem){
             binding.prod= products
-            binding.root.setOnClickListener{
-
-            }
             binding.prodImage.loadImage(products.images?.get(0), progressDrawable)
         }
     }

@@ -10,6 +10,7 @@ class AmazonApplication : Application(){
     override fun onCreate() {
         super.onCreate()
 
+   //     applicationComponent= DaggerApplicationComponent.factory().create(this)
         applicationComponent= DaggerApplicationComponent.factory().create(this)
     }
 

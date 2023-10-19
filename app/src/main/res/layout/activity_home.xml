@@ -1,12 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.HomeActivity">
-    
+
+    <LinearLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#84D8E2">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="60dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1.62"
+            android:background="@drawable/bg_corner"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <ImageView
+                android:id="@+id/search_icon_iv"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="0dp"
+                android:padding="3dp"
+                android:src="@drawable/ic_searchround"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/search_tv"
+                android:layout_width="245dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:paddingTop="0dp"
+                android:paddingBottom="2dp"
+                android:singleLine="true"
+                android:text="Search Amazon.in"
+                android:textColor="@color/black"
+                android:textDirection="locale" />
+
+            <ImageView
+                android:id="@+id/scanner_icon_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/scanner_icon"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
     <FrameLayout
+        android:layout_below="@+id/appbar_layout"
+        android:paddingBottom="50dp"
         android:id="@+id/fragments"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -14,11 +65,8 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/fragments"
         app:menu="@menu/bottom_navigation_menu"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
