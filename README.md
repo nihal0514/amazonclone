@@ -2,7 +2,7 @@
 
 # amazonclone
 
-<img src="https://github.com/nihal0514/amazonclone/assets/77735813/f47356b5-b30c-405f-b347-5083039caf04" width="300" height="300">
+<img src="https://github.com/nihal0514/amazonclone/assets/77735813/f47356b5-b30c-405f-b347-5083039caf04" width="300" height="400">
 ![amazon1](https://github.com/nihal0514/amazonclone/assets/77735813/f47356b5-b30c-405f-b347-5083039caf04)
 
 
