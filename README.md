@@ -4,6 +4,14 @@
 
 
 ![amazon1](https://github.com/nihal0514/amazonclone/assets/77735813/f47356b5-b30c-405f-b347-5083039caf04)
+
+
+
+
+
+
+
+
 ![amazon6](https://github.com/nihal0514/amazonclone/assets/77735813/e9f36a04-319b-4699-8e54-f4016df95009)
 ![amazon7](https://github.com/nihal0514/amazonclone/assets/77735813/49ee1b9b-552f-41c3-a904-9a314eb03f90)
 ![amazon5](https://github.com/nihal0514/amazonclone/assets/77735813/285412ab-0967-43d0-ada8-2ca560e3535c)
