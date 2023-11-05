@@ -14,6 +14,9 @@
 <img src="https://github.com/nihal0514/amazonclone/assets/77735813/6f57f28a-601f-4937-bba5-db2076e63fbf" width="300" height="500">
 <img src="https://github.com/nihal0514/amazonclone/assets/77735813/7da34f7e-3a70-427d-b949-f0331364ba64" width="300" height="500">
 
+<img src="https://github.com/nihal0514/amazonclone/assets/77735813/1b57c1c2-d445-441e-a0d9-4be540b9a6b0" width="300" height="500">
+
+
 
 
 
