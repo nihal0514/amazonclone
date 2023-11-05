@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.order.OrderAcitivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/order_toolbar"
+            app:title="  "
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp" >
+            <TextView
+                android:gravity="right"
+                android:layout_marginRight="20dp"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"/>
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FF9800"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <!--toolbar is one component which is necessary
+                because if we not use this then title is not shown
+                when project executed-->
+
+            <!-- tablayout which contains which is
+                important to show tabs -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_tablayout_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="#FFF"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <!-- view pager is used to open other fragment by using
+            left or right swip-->
+        <com.example.amazonclone.utils.NonSwipeableViewPager
+            android:id="@+id/tab_viewpager_order"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

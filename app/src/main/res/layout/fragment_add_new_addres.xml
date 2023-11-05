@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This linear layout is used to show elements
+	in vertical or in horizontal linear manner -->
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="?android:windowBackground"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/country_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Country"
+                    android:inputType="text"/>
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/name_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:inputType="text"/>
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/mobile_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile"
+                    android:inputType="text"/>
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/fulladdress_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Address"
+                    android:inputType="text"/>
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/pin_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="PIN"
+                    android:inputType="text"/>
+                <EditText
+                    android:padding="20dp"
+                    android:id="@+id/state_Add_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:inputType="text"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_Add_address"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:text="Add Address"
+                    android:background="#FF9800"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</layout>
+

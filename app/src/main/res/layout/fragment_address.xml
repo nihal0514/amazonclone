@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?android:windowBackground"
+    tools:context=".fragments.order.AddressFragment">
+    <FrameLayout
+        android:id="@+id/address_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/address_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:text="Select a delivery address"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/addresses_recyv"
+                    android:layout_below="@+id/address_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/addnewAddress_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/addresses_recyv"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border_address"
+                    android:drawableRight="@drawable/baseline_chevron_right_24"
+                    android:text="Add a new Address"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/findpickup_tv"
+                    android:layout_below="@+id/addnewAddress_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:drawableRight="@drawable/baseline_chevron_right_24"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border_address"
+                    android:text="Find a pickup location near you" />
+                <TextView
+                    android:layout_below="@+id/findpickup_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border_address"
+                    android:drawableRight="@drawable/baseline_chevron_right_24"
+                    android:text="Deliver to multiple addresses" />
+
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </FrameLayout>
+
+</layout>

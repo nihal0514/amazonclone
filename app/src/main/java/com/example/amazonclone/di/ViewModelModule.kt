@@ -1,10 +1,12 @@
 package com.example.amazonclone.di
 
 import androidx.lifecycle.ViewModel
+import com.example.amazonclone.viewModel.AddressViewModel
 import com.example.amazonclone.viewModel.BannerViewModel
 import com.example.amazonclone.viewModel.CartViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
 import com.example.amazonclone.viewModel.LoginViewModel
+import com.example.amazonclone.viewModel.OrderViewModel
 import com.example.amazonclone.viewModel.ProductViewModel
 import dagger.Binds
 import dagger.Module
@@ -37,4 +39,14 @@ abstract class ViewModelModule {
     @ClassKey(CartViewModel::class)
     @IntoMap
     abstract fun cartViewModel(cartViewModel: CartViewModel): ViewModel
+
+    @Binds
+    @ClassKey(AddressViewModel::class)
+    @IntoMap
+    abstract fun addressViewModel(addressViewModel: AddressViewModel): ViewModel
+
+    @Binds
+    @ClassKey(OrderViewModel::class)
+    @IntoMap
+    abstract fun orderViewModel(orderViewModel: OrderViewModel): ViewModel
 }

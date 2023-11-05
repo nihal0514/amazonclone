@@ -29,7 +29,6 @@ class CartListAdapter(private val cartList: ArrayList<ItemsItems>, private val o
         fun bind(cart: ItemsItems,listener: ItemClickListener){
             binding.cart= cart;
             var quantity= cart.quantity
-
             binding.cartQuantity.setText(quantity.toString()!!)
             binding.quantityDecreaseCart.setOnClickListener{
       //          binding.cartQuantity.setText((quantity!!-1).toString())
@@ -57,6 +56,7 @@ class CartListAdapter(private val cartList: ArrayList<ItemsItems>, private val o
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(cartList[position],listener)
         holder.itemView.setOnClickListener{onCartClickListener.onClick(cartList[position])}
+
     }
 
 }

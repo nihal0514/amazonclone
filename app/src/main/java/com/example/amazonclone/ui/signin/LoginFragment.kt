@@ -15,12 +15,10 @@ import com.example.amazonclone.R
 import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.model.login.LoginRequest
-import com.example.amazonclone.model.login.RegisterRequest
-import com.example.amazonclone.ui.HomeActivity
+import com.example.amazonclone.ui.home.HomeActivity
 import com.example.amazonclone.viewModel.LoginViewModel
 import com.example.amazonclone.viewModel.MainViewModelFactory
 import javax.inject.Inject
-import kotlin.math.log
 
 class LoginFragment : Fragment() {
 

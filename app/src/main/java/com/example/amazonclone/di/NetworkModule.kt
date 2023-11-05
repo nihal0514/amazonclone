@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 
 @Module
-class NetworkModule {
+object NetworkModule {
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit {

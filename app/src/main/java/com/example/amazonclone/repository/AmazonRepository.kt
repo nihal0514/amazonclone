@@ -1,9 +1,12 @@
 package com.example.amazonclone.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.amazonclone.db.CategoryDB
+import com.example.amazonclone.model.stripe.StripeServerModel
+import com.example.amazonclone.model.address.AddAddressRequest
+import com.example.amazonclone.model.address.AddAddressResponse
+import com.example.amazonclone.model.address.AddressItem
 import com.example.amazonclone.model.banner.BannerListItem
 import com.example.amazonclone.model.cart.CartRequest
 import com.example.amazonclone.model.cart.CartResponse
@@ -12,6 +15,7 @@ import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.model.login.LoginRequest
 import com.example.amazonclone.model.login.RegisterRequest
 import com.example.amazonclone.model.login.RegisterResponse
+import com.example.amazonclone.model.order.SetOrderResponse
 import com.example.amazonclone.model.products.ProdListItem
 import com.example.amazonclone.model.products.Product
 import com.example.amazonclone.retrofit.ApiInterface
@@ -29,7 +33,7 @@ class AmazonRepository @Inject constructor(
 
     private var compositeDisposable = CompositeDisposable()
 
-    suspend fun getCategories(){
+    fun getCategories(){
 
        /* val result= apiInterface.getAllCategory()
         Log.d("mm",result.body().toString());
@@ -58,7 +62,7 @@ class AmazonRepository @Inject constructor(
     private val _bannerItems= MutableLiveData<List<BannerListItem>>()
     val bannerItems: LiveData<List<BannerListItem>> = _bannerItems
 
-    suspend fun getBannerImages(){
+    fun getBannerImages(){
 
         /*val result= apiInterface.getAllBanner()
         if(result.isSuccessful){
@@ -105,7 +109,7 @@ class AmazonRepository @Inject constructor(
     private val _prodListData= MutableLiveData<List<ProdListItem>>()
     val prodListData: LiveData<List<ProdListItem>> = _prodListData
 
-    suspend fun getproducts(){
+    fun getproducts(){
        /* val result= apiInterface.getProducts()
         if(result.isSuccessful){
             result.body().let {
@@ -145,7 +149,7 @@ class AmazonRepository @Inject constructor(
     private val _addtoCartData= MutableLiveData<CartResponse>()
     val addtoCartData: LiveData<CartResponse> = _addtoCartData
 
-    suspend fun addToCart(cartRequest: CartRequest,token:String){
+    fun addToCart(cartRequest: CartRequest,token:String){
       /*  val result= apiInterface.addtoCart(cartRequest,token)
 
         if(result.isSuccessful){
@@ -178,7 +182,7 @@ class AmazonRepository @Inject constructor(
     }
 */
 
-    suspend fun getCartData(token: String){
+    fun getCartData(token: String){
         compositeDisposable.add(
             apiInterface.getCart(token)
                 .subscribeOn(Schedulers.io())
@@ -189,5 +193,76 @@ class AmazonRepository @Inject constructor(
         )
     }
 
+    private val _getAddress= MutableLiveData<List<AddressItem>>()
+    val getAddress: LiveData<List<AddressItem>> = _getAddress
 
+    fun getAddress(token: String){
+        compositeDisposable.add(
+            apiInterface.getAddresses(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    _getAddress.postValue(it.addresses?.address ?: emptyList())
+                }
+        )
+    }
+
+    private val _addAdress= MutableLiveData<AddAddressResponse>()
+    val addAddress: LiveData<AddAddressResponse> = _addAdress
+
+    fun addAddress(addAddressRequest: AddAddressRequest,token:String){
+
+        compositeDisposable.add(
+            apiInterface.addNewAddress(addAddressRequest,token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    _addAdress.postValue(it)
+                },
+        )
+    }
+
+    private val _getPaymentData= MutableLiveData<StripeServerModel>()
+    val getPaymentData: LiveData<StripeServerModel> = _getPaymentData
+
+
+    fun getServer(token:String){
+
+        compositeDisposable.add(
+            apiInterface.doOrderPayment(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    _getPaymentData.postValue(it)
+                },
+        )
+    }
+
+    private val _setOrderData= MutableLiveData<SetOrderResponse>()
+    val setOrderData: LiveData<SetOrderResponse> = _setOrderData
+
+    fun setOrder(token: String){
+        compositeDisposable.add(
+            apiInterface.setOrder(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    _setOrderData.postValue(it)
+                },
+        )
+    }
+
+    private val _deleteCartData= MutableLiveData<SetOrderResponse>()
+    val deleteCartData: LiveData<SetOrderResponse> = _deleteCartData
+
+    fun deleteCart(token: String){
+        compositeDisposable.add(
+            apiInterface.deleteCart(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe{
+                    _deleteCartData.postValue(it)
+                },
+        )
+    }
 }

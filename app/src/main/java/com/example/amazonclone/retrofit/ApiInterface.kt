@@ -1,5 +1,9 @@
 package com.example.amazonclone.retrofit
 
+import com.example.amazonclone.model.stripe.StripeServerModel
+import com.example.amazonclone.model.address.AddAddressRequest
+import com.example.amazonclone.model.address.AddAddressResponse
+import com.example.amazonclone.model.address.AddressesResponse
 import com.example.amazonclone.model.banner.BannerListResponse
 import com.example.amazonclone.model.cart.CartRequest
 import com.example.amazonclone.model.cart.CartResponse
@@ -8,12 +12,13 @@ import com.example.amazonclone.model.category.CategoryListResponse
 import com.example.amazonclone.model.login.LoginRequest
 import com.example.amazonclone.model.login.RegisterRequest
 import com.example.amazonclone.model.login.RegisterResponse
+import com.example.amazonclone.model.order.SetOrderResponse
 import com.example.amazonclone.model.products.ProdByIdResponse
 import com.example.amazonclone.model.products.ProdListResponse
-import com.example.amazonclone.model.products.Product
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -47,6 +52,21 @@ interface ApiInterface {
 
     @GET("cart/getcart/")
     fun getCart( @Header("Authorization")token: String ): Observable<GetCartResponse>
+
+    @GET("address/getaddress")
+    fun getAddresses( @Header("Authorization")token: String ): Observable<AddressesResponse>
+
+    @POST("address/addaddress")
+    fun addNewAddress(@Body addAddressRequest: AddAddressRequest, @Header("Authorization")token: String ): Observable<AddAddressResponse>
+
+    @POST("acceptpayment/payment")
+    fun doOrderPayment( @Header("Authorization")token: String ): Observable<StripeServerModel>
+
+    @POST("acceptpayment/setorder")
+    fun setOrder( @Header("Authorization")token: String ): Observable<SetOrderResponse>
+
+    @DELETE("cart/deletecart")
+    fun deleteCart( @Header("Authorization")token: String ): Observable<SetOrderResponse>
 
 
 }

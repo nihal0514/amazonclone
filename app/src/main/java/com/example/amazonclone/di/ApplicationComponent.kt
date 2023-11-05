@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.amazonclone.fragments.CartFragment
 import com.example.amazonclone.fragments.HomeFragment
+import com.example.amazonclone.fragments.order.PaymentFragment
+import com.example.amazonclone.fragments.order.AddNewAddres
+import com.example.amazonclone.fragments.order.AddressFragment
 import com.example.amazonclone.ui.product.Prodpage
 import com.example.amazonclone.ui.product.ProductDetails
 import com.example.amazonclone.ui.signin.LoginFragment
 import com.example.amazonclone.ui.signin.SignUpFragment
-import com.example.amazonclone.utils.Injectable
-import com.example.amazonclone.viewModel.CartViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -29,7 +30,10 @@ interface ApplicationComponent {
 
     fun inject4(cartFragment: CartFragment)
 
+    fun inject5(addressFragment: AddressFragment)
+    fun inject6(addNewAddres: AddNewAddres)
 
+    fun inject7(paymentFragment: PaymentFragment)
     fun getMap(): Map<Class<*>, ViewModel>
     // this is the map function that reruns any map data that in the Dagger reach
 

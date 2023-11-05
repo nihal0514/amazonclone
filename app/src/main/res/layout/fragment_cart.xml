@@ -3,63 +3,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragments.CartFragment">
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/tryimp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/cart_totalDetails"
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Subtotal"
-                    android:paddingLeft="5dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:paddingRight="20dp"
-                    />
-                <TextView
-                    android:id="@+id/totalbill_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="152992"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    />
+            android:layout_height="match_parent">
 
-            </LinearLayout>
-           <TextView
-               android:padding="5dp"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:text="EMI Available in Details"/>
-            <TextView
-                android:padding="5dp"
+            <LinearLayout
+                android:id="@+id/cart_totalDetails"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="Your order is eligible for FREE delivery. Select this
+                android:layout_height="200dp">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subtotal"
+                        android:paddingLeft="5dp"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:paddingRight="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/totalbill_cart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="152992"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EMI Available in Details"/>
+                <TextView
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="Your order is eligible for FREE delivery. Select this
 option at checkout."/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_marginTop="20dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/proceedtoBuy_btn"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Proceed to Buy"
+                    android:background="#FF9800"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cart_recyv"
+                android:layout_below="@+id/cart_totalDetails"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:id="@+id/cart_ProgressBar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Proceed to Buy"
-                android:background="#FF9800"/>
-        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cart_recyv"
-            android:layout_below="@+id/cart_totalDetails"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+       </FrameLayout>
 
 </layout>

@@ -1,13 +1,17 @@
 package com.example.amazonclone.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +26,7 @@ import com.example.amazonclone.databinding.FragmentHomeBinding
 import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.model.cart.CartRequest
+import com.example.amazonclone.ui.order.OrderAcitivity
 import com.example.amazonclone.viewModel.BannerViewModel
 import com.example.amazonclone.viewModel.CartViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
@@ -39,7 +44,8 @@ class CartFragment : Fragment(),ItemClickListener {
     lateinit var mainViewModelFactory: MainViewModelFactory
 
     lateinit var binding: FragmentCartBinding
-    private lateinit var token: String;
+    private lateinit var token: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,16 +62,21 @@ class CartFragment : Fragment(),ItemClickListener {
 
         cartListAdaper= CartListAdapter(arrayListOf(), OnCartClickListener{},this)
 
-
         binding.cartRecyv.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
             adapter = cartListAdaper
         }
 
+        binding.proceedtoBuyBtn.setOnClickListener{
+            val intent = Intent (getActivity(), OrderAcitivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
         cartViewModel.refresh(token!!)
 
         ObserveCartModel()
         return binding.root
+
+
     }
 
     private fun ObserveCartModel(){
@@ -79,6 +90,10 @@ class CartFragment : Fragment(),ItemClickListener {
         var a= CartRequest()
         a.itemId= itemId
         a.quantity= 1
+        binding.cartProgressBar.visibility= View.VISIBLE
+        Handler().postDelayed({
+            binding.cartProgressBar.visibility = View.GONE
+        }, 5000)
         cartViewModel.addtoCart(a,token!!)
         cartViewModel.refresh(token!!)
     }
@@ -88,6 +103,10 @@ class CartFragment : Fragment(),ItemClickListener {
         var a= CartRequest()
         a.itemId= itemId
         a.quantity= -1
+        binding.cartProgressBar.visibility= View.VISIBLE
+        Handler().postDelayed({
+            binding.cartProgressBar.visibility = View.GONE
+        }, 5000)
         cartViewModel.addtoCart(a,token!!)
         cartViewModel.refresh(token!!)
     }

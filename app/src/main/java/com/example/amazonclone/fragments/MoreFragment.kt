@@ -5,56 +5,91 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.example.amazonclone.R
+import com.example.amazonclone.databinding.FragmentHomeBinding
+import com.example.amazonclone.databinding.FragmentMoreBinding
+import com.example.amazonclone.di.NetworkModule
+import com.example.amazonclone.retrofit.ApiInterface
+import com.example.amazonclone.utils.Constants.PUBLISHABLE_KEY
+import com.example.amazonclone.utils.apiUtilities
+import com.example.amazonclone.utils.interfaceImp
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MoreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MoreFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var paymentSheet: PaymentSheet
 
+    lateinit var paymentIntent: String
+    lateinit var empheralKey: String
+    lateinit var customer: String
+    lateinit var publishableKey: String
+
+
+    lateinit var binding: FragmentMoreBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false)
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_more,container,false)
+/*
+
+        PaymentConfiguration.init(requireContext(),PUBLISHABLE_KEY )
+        getServer()
+
+        binding.button.setOnClickListener{
+            paymentFlow()
+        }
+
+        paymentSheet = PaymentSheet(this,::onPaymentSheetResult)
+*/
+
+        return binding.root
+    }
+    private fun paymentFlow() {
+        paymentSheet.presentWithPaymentIntent(
+            paymentIntent,
+            PaymentSheet.Configuration(
+                "Nihal",
+                PaymentSheet.CustomerConfiguration(
+                    customer,empheralKey
+                )
+            )
+        )
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MoreFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MoreFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private var apiInterface: interfaceImp = apiUtilities.getApiInterface()
+
+    private fun getServer() {
+        lifecycleScope.launch (Dispatchers.IO){
+            val res= apiInterface.getfromserver()
+            withContext(Dispatchers.Main){
+                if(res.isSuccessful && res.body()!=null){
+                    customer= res.body()!!.customer!!
+                    paymentIntent= res.body()!!.paymentIntent!!
+                    empheralKey= res.body()!!.ephemeralKey!!
+                    publishableKey= res.body()!!.publishableKey!!
+
+                    Toast.makeText(requireContext(),"Proceed for payment", Toast.LENGTH_SHORT).show()
+
                 }
             }
+        }
     }
+    fun onPaymentSheetResult(paymentSheetResult: PaymentSheetResult) {
+        // implemented in the next steps
+        if(paymentSheetResult is PaymentSheetResult.Completed){
+            Toast.makeText(requireContext(),"Payment Done", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

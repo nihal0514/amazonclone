@@ -18,7 +18,7 @@ fun getProgressDrawable(context: Context): CircularProgressDrawable {
 
 fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable) {
     val oldValue = "localhost"
-    val newValue = "192.168.1.39"
+    val newValue = "192.168.1.41"
 
     val output = uri?.replace(oldValue, newValue)
     val options = RequestOptions()
@@ -33,7 +33,7 @@ fun ImageView.loadImage(uri: String?, progressDrawable: CircularProgressDrawable
 fun ImageView.loadImage1(uri: String?) {
 
     val oldValue = "localhost"
-    val newValue = "192.168.1.39"
+    val newValue = "192.168.1.41"
 
     val output = uri?.replace(oldValue, newValue)
     val options = RequestOptions()

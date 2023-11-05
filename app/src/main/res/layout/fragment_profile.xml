@@ -61,6 +61,7 @@
                     android:text="Sign in"
                     android:background="#FF9800"/>
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_createacc"
                     android:layout_marginTop="20dp"
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
@@ -70,244 +71,198 @@
                     android:background="#D6DADB"/>
             </LinearLayout>
         </RelativeLayout>
-        <ScrollView
+        <RelativeLayout
+            android:id="@+id/aftersignin_profile"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent">
-            <RelativeLayout
-                android:id="@+id/aftersignin_profile"
+            <LinearLayout
+                android:id="@+id/appbar_profile_aftersignin"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="match_parent">
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:background="#84D8E2">
                 <LinearLayout
-                    android:id="@+id/appbar_profile_aftersignin"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp"
-                    android:paddingLeft="10dp"
-                    android:background="#84D8E2">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/amazon"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/amazon"/>
-                        <LinearLayout
+                        android:orientation="horizontal">
+                        <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="40dp"
-                                android:textColor="#414141"
-                                android:textSize="30dp"
-                                android:text="Hii,"/>
-                            <TextView
-                                android:id="@+id/profile_name"
-                                android:layout_width="100dp"
-                                android:layout_height="40dp"
-                                android:textColor="#414141"
-                                android:textSize="30dp"
-                                android:text="Nihal"/>
-                        </LinearLayout>
-
-
+                            android:layout_height="40dp"
+                            android:textColor="#414141"
+                            android:textSize="30dp"
+                            android:text="Hii,"/>
+                        <TextView
+                            android:id="@+id/profile_name"
+                            android:layout_width="100dp"
+                            android:layout_height="40dp"
+                            android:textColor="#414141"
+                            android:textSize="30dp"
+                            android:text="Nihal"/>
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:paddingRight="30dp"
-                        android:paddingTop="10dp"
-                        android:orientation="vertical"
-                        android:gravity="right"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/notif_icon"/>
-                        <ImageView
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/profile_img"/>
-                    </LinearLayout>
+
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_below="@id/appbar_profile_aftersignin"
-                    android:id="@+id/order_setting"
                     android:layout_width="match_parent"
+                    android:paddingRight="30dp"
+                    android:paddingTop="10dp"
                     android:orientation="vertical"
-                    android:layout_height="140dp">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="60dp">
-                        <TextView
-                            android:layout_weight="1"
-                            android:padding="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Your Orders"
-                            android:gravity="center"
-                            android:background="@drawable/curve_button"
-                            android:textColor="#585858"
-                            android:textDirection="locale"
-                            android:textSize="20dp"
-                            />
-                        <TextView
-                            android:layout_weight="1"
-                            android:padding="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Buy Again"
-                            android:gravity="center"
-                            android:background="@drawable/curve_button"
-                            android:textColor="#585858"
-                            android:textDirection="locale"
-                            android:textSize="20dp"
-                            />
-
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_height="60dp">
-                        <TextView
-                            android:layout_weight="1"
-                            android:padding="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Your Account"
-                            android:gravity="center"
-                            android:background="@drawable/curve_button"
-                            android:textColor="#585858"
-                            android:textDirection="locale"
-                            android:textSize="20dp"
-                            />
-                        <TextView
-                            android:layout_weight="1"
-                            android:padding="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="Your Lists"
-                            android:gravity="center"
-                            android:background="@drawable/curve_button"
-                            android:textColor="#585858"
-                            android:textDirection="locale"
-                            android:textSize="20dp"
-                            />
-
-                    </LinearLayout>
-
+                    android:gravity="right"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/notif_icon"/>
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/profile_img"/>
                 </LinearLayout>
-
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@id/appbar_profile_aftersignin"
+                android:id="@+id/order_setting"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="140dp">
                 <LinearLayout
-                    android:id="@+id/yourorder_profile"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_below="@id/order_setting"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="vertical">
-
+                    android:orientation="horizontal"
+                    android:layout_height="60dp">
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Your Orders"
-                        android:textColor="#5B6161"
-                        android:textSize="22dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Hi,you have no recent orders"
-                        android:textColor="#585858"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/curve_button"
                         android:gravity="center"
-                        android:padding="10dp"
-                        android:text="Return to Home Page"
+                        android:background="@drawable/curve_button"
                         android:textColor="#585858"
                         android:textDirection="locale"
-                        android:textSize="20dp" />
-
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Buy Again"
+                        android:gravity="center"
+                        android:background="@drawable/curve_button"
+                        android:textColor="#585858"
+                        android:textDirection="locale"
+                        android:textSize="20dp"
+                        />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_below="@id/yourorder_profile"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:orientation="vertical">
-
+                    android:orientation="horizontal"
+                    android:layout_height="60dp">
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Your Lists"
-                        android:textColor="#5B6161"
-                        android:textSize="22dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="You haven't created any list"
-                        android:textColor="#585858"
-                        android:textSize="18dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/curve_button"
-                        android:gravity="center"
+                        android:layout_weight="1"
                         android:padding="10dp"
-                        android:text="Create a list"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Your Account"
+                        android:gravity="center"
+                        android:background="@drawable/curve_button"
                         android:textColor="#585858"
                         android:textDirection="locale"
-                        android:textSize="20dp" />
-
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Your Lists"
+                        android:gravity="center"
+                        android:background="@drawable/curve_button"
+                        android:textColor="#585858"
+                        android:textDirection="locale"
+                        android:textSize="20dp"
+                        />
 
                 </LinearLayout>
-            </RelativeLayout>
-        </ScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/yourorder_profile"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:layout_below="@id/order_setting"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Orders"
+                    android:textColor="#5B6161"
+                    android:textSize="22dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hi,you have no recent orders"
+                    android:textColor="#585858"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/curve_button"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Return to Home Page"
+                    android:textColor="#585858"
+                    android:textDirection="locale"
+                    android:textSize="20dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
     </FrameLayout>
 
 </layout>
