@@ -8,6 +8,7 @@ import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.model.products.ProdListItem
 import com.example.amazonclone.model.products.Product
 import com.example.amazonclone.repository.AmazonRepository
+import com.example.amazonclone.utils.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class ProductViewModel @Inject constructor(
     private val repository: AmazonRepository
 ) : ViewModel(){
 
-    val prodLiveData: LiveData<List<ProdListItem>> = repository.prodListData
+    val prodLiveData: LiveData<UiState<List<ProdListItem>>> = repository.prodListData
     val prodLiveByIdData: LiveData<Product> = repository.prodListByIdData
 
     fun refresh() {

@@ -7,8 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.amazonclone.databinding.ItemAddrressesBinding
 import com.example.amazonclone.databinding.ItemCartBinding
 import com.example.amazonclone.model.address.AddressItem
-import com.example.amazonclone.model.cart.ItemsItems
-import com.example.amazonclone.utils.getProgressDrawable
+import kotlinx.android.synthetic.main.item_addrresses.view.deliver_address_btn
 
 @SuppressLint("NotifyDataSetChanged")
 class AdressListAdapter (
@@ -38,6 +37,9 @@ class AdressListAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(addressList[position])
+        holder.itemView.deliver_address_btn.setOnClickListener{
+            onAddressClickListener.onClick(addressList[position])
+        }
     }
 }
 

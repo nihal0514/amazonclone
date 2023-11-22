@@ -3,10 +3,12 @@ package com.example.amazonclone.fragments.order
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +19,7 @@ import com.example.amazonclone.adapters.OnAddressClickListener
 import com.example.amazonclone.databinding.FragmentAddressBinding
 import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
+import com.example.amazonclone.utils.UiState
 import com.example.amazonclone.viewModel.AddressViewModel
 import com.example.amazonclone.viewModel.MainViewModelFactory
 import javax.inject.Inject
@@ -40,6 +43,7 @@ class AddressFragment : Fragment() {
     private lateinit var token: String
 
     private var viewPagerNavigationListener: ViewPagerNavigationListener? = null
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -65,7 +69,13 @@ class AddressFragment : Fragment() {
         sharedPreferences = requireContext().getSharedPreferences("amazonclone", Context.MODE_PRIVATE)
         token = sharedPreferences.getString("token",null).toString()
 
-        addressListAdapter= AdressListAdapter(arrayListOf(), OnAddressClickListener { })
+        addressListAdapter= AdressListAdapter(arrayListOf(), OnAddressClickListener {
+       //     Log.d("mm",it.id.toString())
+            var editor = sharedPreferences?.edit()
+            editor?.putString("address",it.id)
+            editor?.apply()
+            viewPagerNavigationListener?.navigateToNextPage();
+        })
 
         binding.addressesRecyv.apply {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
@@ -98,11 +108,25 @@ class AddressFragment : Fragment() {
     }
     private fun ObserveAddressModel() {
         addressViewModel.addressLiveData.observe(viewLifecycleOwner){
-            if(it.size>0){
-                binding.addressTv.visibility= View.VISIBLE
+            when(it){
+                is UiState.Success ->{
+                    binding.addressProgressBar.visibility = View.GONE
+                    if(it.data.size>0){
+                        binding.addressTv.visibility= View.VISIBLE
+                    }
+
+                    addressListAdapter.updateAddress(it.data)
+                }
+                is UiState.Loading -> {
+                    binding.addressProgressBar.visibility = View.VISIBLE
+                }
+                is UiState.Error -> {
+                    //Handle Error
+                    binding.addressProgressBar.visibility = View.GONE
+                    Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                }
             }
 
-            addressListAdapter.updateAddress(it)
         }
     }
 

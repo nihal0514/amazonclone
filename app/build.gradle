@@ -94,4 +94,8 @@ dependencies {
 
     //stripe 
     implementation 'com.stripe:stripe-android:20.15.4'
+
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+
 }

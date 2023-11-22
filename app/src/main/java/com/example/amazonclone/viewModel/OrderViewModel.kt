@@ -5,13 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.amazonclone.model.stripe.StripeServerModel
 import com.example.amazonclone.repository.AmazonRepository
+import com.example.amazonclone.utils.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OrderViewModel @Inject constructor(
     private val repository: AmazonRepository
 ) : ViewModel(){
-    val paymentData: LiveData<StripeServerModel> = repository.getPaymentData
+    val paymentData: LiveData<UiState<StripeServerModel>> = repository.getPaymentData
 
     fun getServer(id: String) {
         getServerVm(id)

@@ -5,13 +5,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.repository.AmazonRepository
+import com.example.amazonclone.utils.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CategoryViewModel @Inject constructor(
     private val repository: AmazonRepository
 ) :ViewModel(){
-    val categoryLiveData: LiveData<List<CategoryListItem>> = repository.categoryDeals
+    val categoryLiveData: LiveData<UiState<List<CategoryListItem>>> = repository.categoryDeals
 
     fun refresh() {
        fetchCategoryDeals()

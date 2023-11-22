@@ -17,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.amazonclone.R
 import com.example.amazonclone.databinding.FragmentCartBinding
 import com.example.amazonclone.databinding.FragmentProfileBinding
+import com.example.amazonclone.ui.product.Prodpage
 import com.example.amazonclone.ui.signin.LoginActivity
 
 class ProfileFragment : Fragment() {

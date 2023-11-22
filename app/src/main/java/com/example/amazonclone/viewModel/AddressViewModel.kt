@@ -7,13 +7,14 @@ import com.example.amazonclone.model.address.AddAddressRequest
 import com.example.amazonclone.model.address.AddressItem
 import com.example.amazonclone.model.cart.CartRequest
 import com.example.amazonclone.repository.AmazonRepository
+import com.example.amazonclone.utils.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddressViewModel @Inject constructor(
     private val repository: AmazonRepository
 ): ViewModel(){
-    val addressLiveData: LiveData<List<AddressItem>> = repository.getAddress
+    val addressLiveData: LiveData<UiState<List<AddressItem>>> = repository.getAddress
 
     fun refresh(token: String) {
         fetchAddressItems(token)

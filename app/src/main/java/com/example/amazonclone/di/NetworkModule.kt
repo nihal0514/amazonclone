@@ -1,7 +1,11 @@
 package com.example.amazonclone.di
 
-import com.example.amazonclone.retrofit.ApiInterface
+import com.example.amazonclone.api.ApiHelper
+import com.example.amazonclone.api.ApiHelperImpl
+import com.example.amazonclone.api.ApiService
 import com.example.amazonclone.utils.Constants
+import com.example.amazonclone.utils.Constants.BASE_URL
+import com.stripe.android.core.networking.RequestHeadersFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -15,6 +19,8 @@ import javax.inject.Singleton
 
 @Module
 object NetworkModule {
+
+    fun ProvideBaseUrl() = Constants.BASE_URL
     @Singleton
     @Provides
     fun providesRetrofit(): Retrofit {
@@ -25,17 +31,25 @@ object NetworkModule {
 
 
 
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL)
+        return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpBuilder.build())
             .build()
     }
 
-    @Singleton
+   /* @Singleton
     @Provides
-    fun provideApi(retrofit: Retrofit): ApiInterface{
-        return retrofit.create(ApiInterface::class.java)
-    }
+    fun provideService(retrofit: Retrofit): ApiService{
+        return retrofit.create(ApiService::class.java)
+    }*/
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 
 }

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,7 @@ import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.model.cart.CartRequest
 import com.example.amazonclone.ui.order.OrderAcitivity
+import com.example.amazonclone.utils.UiState
 import com.example.amazonclone.viewModel.BannerViewModel
 import com.example.amazonclone.viewModel.CartViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
@@ -75,39 +77,37 @@ class CartFragment : Fragment(),ItemClickListener {
 
         ObserveCartModel()
         return binding.root
-
-
-    }
-
-    private fun ObserveCartModel(){
-        cartViewModel.cartLiveData.observe(viewLifecycleOwner){
-            binding.totalbillCart.text= it.bill.toString()
-            cartListAdaper.updateCart(it.items ?: emptyList())
-        }
     }
 
     override fun onPlusItemClick(itemId:String) {
         var a= CartRequest()
         a.itemId= itemId
         a.quantity= 1
-        binding.cartProgressBar.visibility= View.VISIBLE
-        Handler().postDelayed({
-            binding.cartProgressBar.visibility = View.GONE
-        }, 5000)
         cartViewModel.addtoCart(a,token!!)
-        cartViewModel.refresh(token!!)
     }
-
 
     override fun onMinusItemClick(itemId: String) {
         var a= CartRequest()
         a.itemId= itemId
         a.quantity= -1
-        binding.cartProgressBar.visibility= View.VISIBLE
-        Handler().postDelayed({
-            binding.cartProgressBar.visibility = View.GONE
-        }, 5000)
         cartViewModel.addtoCart(a,token!!)
-        cartViewModel.refresh(token!!)
+    }
+    private fun ObserveCartModel(){
+        cartViewModel.cartLiveData.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Success ->{
+                    binding.cartShimmer.stopShimmerAnimation()
+                    binding.totalbillCart.text= it.data.bill.toString()
+                    cartListAdaper.updateCart(it.data.items ?: emptyList())
+                }
+                is UiState.Loading -> {
+                    binding.cartShimmer.startShimmerAnimation()
+                }
+                is UiState.Error -> {
+                    binding.cartShimmer.stopShimmerAnimation()
+                    Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 }

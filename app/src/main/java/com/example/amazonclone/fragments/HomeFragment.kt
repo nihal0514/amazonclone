@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.model.banner.BannerListItem
 import com.example.amazonclone.model.category.CategoryListItem
 import com.example.amazonclone.ui.product.Prodpage
+import com.example.amazonclone.utils.UiState
 import com.example.amazonclone.viewModel.BannerViewModel
 import com.example.amazonclone.viewModel.CategoryViewModel
 import com.example.amazonclone.viewModel.MainViewModelFactory
@@ -87,7 +89,21 @@ class HomeFragment : Fragment() {
     private fun observeBannerModel() {
         bannerViewModel.bannerLiveData.observe(viewLifecycleOwner){banner ->
             banner.let {
-                imageSliderAdapter.updateBanner(it)
+                when(it){
+                    is UiState.Success ->{
+                   //     binding.addressProgressBar.visibility = View.GONE
+                        imageSliderAdapter.updateBanner(it.data)
+                    }
+                    is UiState.Loading -> {
+                     //   binding.addressProgressBar.visibility = View.VISIBLE
+                    }
+                    is UiState.Error -> {
+                        //Handle Error
+                    //    binding.addressProgressBar.visibility = View.GONE
+                     //   Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+
             }
 
         }
@@ -96,7 +112,21 @@ class HomeFragment : Fragment() {
     private fun observeViewModel() {
         categoryViewModel.categoryLiveData.observe(viewLifecycleOwner){categories ->
             categories.let {
-                categoryListAdapters.updateCategory(it);
+                when(it){
+                    is UiState.Success ->{
+                        categoryListAdapters.updateCategory(it.data);
+                    }
+                    is UiState.Loading -> {
+                    //    binding.addressProgressBar.visibility = View.VISIBLE
+                    }
+                    is UiState.Error -> {
+                        //Handle Error
+                   //     binding.addressProgressBar.visibility = View.GONE
+                     //   Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                    }
+                }
+
+
             }
 
         }

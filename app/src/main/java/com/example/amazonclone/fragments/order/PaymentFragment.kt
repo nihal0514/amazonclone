@@ -17,6 +17,7 @@ import com.example.amazonclone.databinding.FragmentPaymentBinding
 import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.utils.Constants.PUBLISHABLE_KEY
+import com.example.amazonclone.utils.UiState
 import com.example.amazonclone.viewModel.MainViewModelFactory
 import com.example.amazonclone.viewModel.OrderViewModel
 import com.stripe.android.PaymentConfiguration
@@ -95,16 +96,31 @@ class PaymentFragment : Fragment() {
                    }
                }
             })
+        binding.striperadio.isChecked= true
 
         return binding.root
     }
 
     private fun getPaymentServerData() {
         orderViewModel.paymentData.observe(viewLifecycleOwner){
-            paymentIntent= it.paymentIntent!!
-            empheralKey= it.ephemeralKey!!
-            customer= it.customer!!
-            publishableKey= it.publishableKey!!
+            when(it){
+                is UiState.Success ->{
+                    paymentIntent= it.data.paymentIntent!!
+                    empheralKey= it.data.ephemeralKey!!
+                    customer= it.data.customer!!
+                    publishableKey= it.data.publishableKey!!
+                }
+                is UiState.Loading -> {
+//                    binding.addressProgressBar.visibility = View.VISIBLE
+                }
+                is UiState.Error -> {
+//                    //Handle Error
+//                    binding.addressProgressBar.visibility = View.GONE
+//                    Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
+                }
+            }
+
+
 
         }
     }

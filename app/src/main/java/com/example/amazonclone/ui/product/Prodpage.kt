@@ -6,15 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.amazonclone.R
 import com.example.amazonclone.adapters.OnProdClickListener
 import com.example.amazonclone.adapters.ProdPageAdapter
+import com.example.amazonclone.databinding.FragmentCartBinding
+import com.example.amazonclone.databinding.FragmentProdpageBinding
 import com.example.amazonclone.di.ApplicationComponent
 import com.example.amazonclone.di.DaggerApplicationComponent
 import com.example.amazonclone.model.products.ProdListItem
+import com.example.amazonclone.utils.UiState
 import com.example.amazonclone.viewModel.MainViewModelFactory
 import com.example.amazonclone.viewModel.ProductViewModel
 import javax.inject.Inject
@@ -30,21 +35,20 @@ class Prodpage : Fragment() {
     @Inject
     lateinit var mainViewModelFactory: MainViewModelFactory
 
+    lateinit var binding: FragmentProdpageBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_prodpage, container, false)
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_prodpage,container,false)
 
         val categoryName= arguments?.getString("name")
 
         applicationComponent = DaggerApplicationComponent.factory().create(requireContext())
         applicationComponent.inject2(this)
         productViewModel = ViewModelProvider(this, mainViewModelFactory)[ProductViewModel::class.java]
-
-        prodListRecyv= view.findViewById<View>(R.id.prodPageRecyv)as RecyclerView
-
         prodListItem= arrayListOf()
 
         prodPageAdapter = ProdPageAdapter(arrayListOf(),categoryName!!,OnProdClickListener{
@@ -57,28 +61,43 @@ class Prodpage : Fragment() {
             fragmentTransaction.replace(R.id.prodpage,fragment)
             fragmentTransaction.commit()
         })
-        prodListRecyv.apply {
+        binding.prodPageRecyv.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = prodPageAdapter
         }
 
         productViewModel.refresh()
         observeProdViewModel(categoryName)
-        return view
+        return binding.root
     }
 
     private fun observeProdViewModel(categoryname: String) {
+
         productViewModel.prodLiveData.observe(viewLifecycleOwner){products ->
-            products.let {
-                for(i in 0..(it.size-1)){
-                    if(it[i].category?.name == categoryname){
-                        prodListItem.add(it[i])
-                        Log.d("hii",it[i].category?.name.toString())
+            when(products){
+                is UiState.Success ->{
+                    binding.prodShimmer.stopShimmerAnimation()
+                    products.let {
+                        for(i in 0..(it.data.size-1)){
+                            if(it.data[i].category?.name == categoryname){
+                                prodListItem.add(it.data[i])
+                                Log.d("hii",it.data[i].category?.name.toString())
+                            }
+                        }
+                        prodPageAdapter.updateProducts(prodListItem)
+
                     }
                 }
-                prodPageAdapter.updateProducts(prodListItem)
-
+                is UiState.Loading -> {
+                    binding.prodShimmer.startShimmerAnimation()
+                }
+                is UiState.Error -> {
+                    binding.prodShimmer.stopShimmerAnimation()
+                    Toast.makeText(activity, products.message, Toast.LENGTH_LONG).show()
+                }
             }
+
+
         }
     }
 }

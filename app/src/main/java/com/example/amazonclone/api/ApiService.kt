@@ -1,4 +1,4 @@
-package com.example.amazonclone.retrofit
+package com.example.amazonclone.api
 
 import com.example.amazonclone.model.stripe.StripeServerModel
 import com.example.amazonclone.model.address.AddAddressRequest
@@ -24,7 +24,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface ApiInterface {
+interface ApiService {
 
     @GET("category/getcategory/")
      fun getAllCategory():Observable<CategoryListResponse>

@@ -35,11 +35,21 @@
                 android:src="@drawable/baseline_arrow_drop_down_24"/>
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.facebook.shimmer.ShimmerFrameLayout
             android:layout_below="@+id/filterprod"
-            android:id="@+id/prodPageRecyv"
+            android:id="@+id/prod_shimmer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/prodPageRecyv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
 
     </RelativeLayout>
 
